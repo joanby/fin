@@ -11,14 +11,15 @@ vi.mock("recharts", () => ({
   Tooltip: () => null,
 }));
 
-// Mock lightweight-charts
+// Mock lightweight-charts (v5 API: chart.addSeries(LineSeries, ...))
 vi.mock("lightweight-charts", () => ({
   createChart: () => ({
-    addLineSeries: () => ({ setData: vi.fn(), update: vi.fn() }),
+    addSeries: () => ({ setData: vi.fn(), update: vi.fn() }),
     timeScale: () => ({ fitContent: vi.fn() }),
     applyOptions: vi.fn(),
     remove: vi.fn(),
   }),
+  LineSeries: {},
   ColorType: { Solid: 0 },
   LineType: { Simple: 0 },
 }));
@@ -28,6 +29,8 @@ class MockEventSource {
   onopen: (() => void) | null = null;
   onmessage: ((e: MessageEvent) => void) | null = null;
   onerror: (() => void) | null = null;
+  addEventListener = vi.fn();
+  removeEventListener = vi.fn();
   close = vi.fn();
   constructor() {
     setTimeout(() => this.onopen?.(), 0);
