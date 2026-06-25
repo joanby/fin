@@ -1,2 +1,2 @@
 # fin
-A new version of FinAlly for Gastown to work on
+Una nueva versión de FinAlly para que Gastown trabaje en ella.
